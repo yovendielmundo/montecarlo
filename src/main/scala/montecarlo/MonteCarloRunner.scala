@@ -7,7 +7,7 @@ import scala.util.Random
 
 object MonteCarloRunner {
 
-  val standardConfig = config(
+  val standardConfig: MeasureBuilder[Unit, Double] = config(
     Key.exec.minWarmupRuns -> 5,
     Key.exec.maxWarmupRuns -> 10,
     Key.exec.benchRuns     -> 10,
@@ -54,7 +54,7 @@ object MonteCarlo {
   def monteCarloPiPar(iterations: Int): Double = {
     val ((pi1, pi2), (pi3, pi4)) = parallel(
       parallel(mcCount(iterations / 4), mcCount(iterations / 4)),
-      parallel(mcCount(iterations / 4), mcCount(iterations - 3 * (iterations / 4)))
+      parallel(mcCount(iterations / 4), mcCount(iterations / 4))
     )
     4.0 * (pi1 + pi2 + pi3 + pi4) / iterations
   }
